@@ -1,14 +1,10 @@
 {
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports.biome": "explicit",
-    "editor.formatOnSave": "always"
-  },
   "[json]": {
     "editor.defaultFormatter": "biomejs.biome",
     "editor.formatOnSave": true
   },
-  "[css]": {
+  "[scss]": {
     "editor.defaultFormatter": "biomejs.biome",
     "editor.formatOnSave": true
   },
