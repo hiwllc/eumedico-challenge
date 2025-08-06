@@ -5,10 +5,10 @@ export type Gender = "Male" | "Female" | "Genderless" | "unknown";
 export type Character = {
   id: number;
   name: string;
-  status: Status;
-  species: Species;
-  type: string;
-  gender: Gender;
+  status: Status | string;
+  species: Species | string;
+  type: string | string;
+  gender: Gender | string;
   origin: {
     name: string;
     url: string;
