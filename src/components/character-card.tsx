@@ -10,7 +10,7 @@ export function CharacterCard({ character }: Props) {
   return (
     <article
       key={character.id}
-      className="relative rounded-md hover:shadow-2xl transition-shadow"
+      className="relative rounded-md hover:shadow-2xl transition-shadow focus-within:outline-none focus-within:shadow-2xl"
     >
       <Image
         src={character.image}
@@ -26,7 +26,10 @@ export function CharacterCard({ character }: Props) {
           Location: {character.location.name}
         </h5>
 
-        <Link href={`/${character.id}`} className="absolute inset-0">
+        <Link
+          href={`/${character.id}`}
+          className="absolute inset-0 focus:outline-none"
+        >
           <span className="sr-only">
             Ver detalhes do personagem {character.name}
           </span>
