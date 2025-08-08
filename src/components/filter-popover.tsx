@@ -68,7 +68,7 @@ export function FilterPopover({ groups, onReset }: Props) {
                 <CommandGroup key={group.title}>
                   {group.options.map((option) => (
                     <CommandItem
-                      key={option.value}
+                      key={`${group.title}-${option.value}`}
                       onSelect={() => onSelectionChange(option.title)}
                     >
                       <Checkbox

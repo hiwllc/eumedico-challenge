@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import user from "@testing-library/user-event";
 import { useState } from "react";
-import { expect, test, vi } from "vitest";
+import { expect, test } from "vitest";
 import { FilterPopover } from "~/components/filter-popover";
 
 function FilterImplementation() {
