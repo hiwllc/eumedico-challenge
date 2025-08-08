@@ -23,7 +23,7 @@ export type Character = {
   created: string;
 };
 
-export type Characters = Array<Pick<Character, 'id' | 'name' | 'location' | 'status'>>;
+export type Characters = Array<Pick<Character, 'id' | 'image' | 'name' | 'location' | 'status'>>;
 
 export type PageInfo = {
   count: number;
