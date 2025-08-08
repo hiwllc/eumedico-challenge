@@ -18,4 +18,11 @@ test("Character information should be visible in character card", () => {
   expect(screen.getByRole("heading", { level: 4 })).toHaveTextContent(
     `Status: ${character.status}`,
   );
+
+  const link = screen.getByRole("link", {
+    name: `Ver detalhes do personagem ${character.name}`,
+  });
+
+  expect(link).toBeInTheDocument();
+  expect(link).toHaveAttribute("href", `/${character.id}`);
 });
