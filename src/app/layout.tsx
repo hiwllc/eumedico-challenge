@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
-import { Filter } from "~/components/filter";
 
 export const metadata: Metadata = {
   title: {
@@ -35,11 +34,7 @@ export default function RootLayout({
           </section>
         </header>
 
-        <main>
-          <Filter />
-
-          {children}
-        </main>
+        <main className="mx-auto container px-6">{children}</main>
       </body>
     </html>
   );

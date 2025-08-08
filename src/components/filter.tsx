@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback } from "react";
 import { useQueryString } from "~/hooks/use-query-string";
 import { FilterPopover } from "./filter-popover";
 import { FilterSearch } from "./filter-search";
@@ -21,12 +22,21 @@ export function Filter() {
   const gender = useQueryString("gender");
   const search = useQueryString("q");
 
+  const onSearch = useCallback(
+    (value: string) => {
+      value.length > 3 ? search.update(value) : search.remove();
+    },
+    [search.remove, search.update],
+  );
+
   return (
-    <section className="w-full py-10 flex flex-col px-6 sticky top-0 z-10 bg-white/40 backdrop-blur-xl">
+    <section className="w-full py-10 flex flex-col sticky top-0 z-10 bg-white/40 backdrop-blur-xl">
       <div className="w-full container mx-auto space-y-3">
-        <h4 className="text-md font-bold text-foreground">Busca e Filtros</h4>
+        <h4 className="text-sm font-bold text-foreground uppercase">
+          Busca e Filtros
+        </h4>
         <form className="w-full gap-4 flex flex-col md:flex-row">
-          <FilterSearch onSearch={search.update} debounce={500} />
+          <FilterSearch onSearch={onSearch} debounce={500} />
 
           <FilterPopover
             onReset={status.resetAll}

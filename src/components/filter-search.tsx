@@ -7,7 +7,6 @@ type Props = {
   onSearch: (value: string) => void;
   initialValue?: string;
   debounce?: number;
-  minValueToSearch?: number;
   placeholder?: string;
 };
 
@@ -15,26 +14,21 @@ export function FilterSearch({
   onSearch,
   initialValue = "",
   debounce = 300,
-  minValueToSearch = 3,
   placeholder = "Buscar personagens",
 }: Props) {
   const [term, setTerm] = useState(initialValue);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      const search = term.trim();
-
-      if (search.length > minValueToSearch) {
-        onSearch(search);
-      }
+      onSearch(term.trim());
     }, debounce);
 
     return () => clearTimeout(timeout);
-  }, [term, debounce, onSearch, minValueToSearch]);
+  }, [term, debounce, onSearch]);
 
   return (
     <Input
-      className="text-sm font-medium w-full md:max-w-96 h-10"
+      className="text-sm font-medium w-full md:max-w-96 h-10 border-2 rounded-none border-green-800"
       placeholder={placeholder}
       value={term}
       onChange={({ target }) => setTerm(target.value)}

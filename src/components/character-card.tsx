@@ -10,16 +10,16 @@ export function CharacterCard({ character }: Props) {
   return (
     <article
       key={character.id}
-      className="relative rounded-md hover:shadow-2xl transition-shadow focus-within:outline-none focus-within:shadow-2xl"
+      className="relative transition-shadow focus-within:outline-none border-4 border-green-900"
     >
       <Image
         src={character.image}
         width={320}
         height={460}
         alt={character.name}
-        className="w-full object-cover object-center rounded-md rounded-b-none"
+        className="w-full object-cover object-center"
       />
-      <div className="px-4 py-6 border-2 border-t-0 rounded-b-md h-36">
+      <div className="px-4 py-6 h-36">
         <h3 className="font-bold">{character.name}</h3>
         <h4 className="text-sm font-semibold">Status: {character.status}</h4>
         <h5 className="text-sm font-medium">

@@ -26,7 +26,6 @@ test("Should select and deseclet an option", async () => {
       onSearch={search}
       debounce={debounce}
       placeholder="Search"
-      minValueToSearch={0}
     />,
   );
 

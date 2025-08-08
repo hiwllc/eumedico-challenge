@@ -34,12 +34,15 @@ export function FilterPopover({ groups, onReset }: Props) {
         <Button
           variant="outline"
           size="sm"
-          className="border-dashed h-10 justify-start"
+          className="border-dashed rounded-none border-2 border-green-800 h-10 justify-start text-green-800 hover:bg-green-200/30"
         >
           <PlusCircleIcon className="size-4" /> Filtrar
           {hasFilters ? (
             <>
-              <Separator orientation="vertical" />
+              <Separator
+                orientation="vertical"
+                className="bg-green-800 [data-orientation=vertical]:w-[3px]"
+              />
 
               {groups
                 .filter(({ selected }) => selected.length)
@@ -47,7 +50,7 @@ export function FilterPopover({ groups, onReset }: Props) {
                   <div
                     key={group.title}
                     data-testid={`badge-${(group.title ?? "").toLocaleLowerCase()}`}
-                    className="text-xs font-semibold p-1 px-2 bg-foreground text-background rounded-md"
+                    className="text-xs font-semibold p-1 px-2 bg-green-800 text-background"
                   >
                     {group.title}: {group.selected.join("")}
                   </div>
@@ -57,7 +60,10 @@ export function FilterPopover({ groups, onReset }: Props) {
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent align="start" className="p-0">
+      <PopoverContent
+        align="start"
+        className="p-0 border-3 rounded-none border-green-800"
+      >
         <Command>
           <CommandInput placeholder="Buscar" />
           <CommandList>
@@ -65,11 +71,12 @@ export function FilterPopover({ groups, onReset }: Props) {
 
             {groups.map(({ onSelectionChange, ...group }) => (
               <>
-                <CommandGroup key={group.title}>
+                <CommandGroup key={group.title} className="p-0">
                   {group.options.map((option) => (
                     <CommandItem
                       key={`${group.title}-${option.value}`}
                       onSelect={() => onSelectionChange(option.title)}
+                      className="hover:bg-green-800/30 rounded-none"
                     >
                       <Checkbox
                         name={option.title}
@@ -80,15 +87,17 @@ export function FilterPopover({ groups, onReset }: Props) {
                   ))}
                 </CommandGroup>
 
-                <CommandSeparator className="last-of-type:hidden" />
+                <CommandSeparator className="last-of-type:hidden bg-green-800" />
               </>
             ))}
           </CommandList>
 
-          <CommandSeparator />
+          <CommandSeparator className="bg-green-800" />
 
-          <CommandGroup>
-            <CommandItem onSelect={onReset}>Limpar</CommandItem>
+          <CommandGroup className="p-0">
+            <CommandItem onSelect={onReset} className="rounded-none">
+              Limpar
+            </CommandItem>
           </CommandGroup>
         </Command>
       </PopoverContent>
