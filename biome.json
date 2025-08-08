@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "includes": ["src/**/*.tsx", "**/*.d.tsx", "!src/components/ui/**"]
+  },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
@@ -7,8 +10,7 @@
     "lineWidth": 80
   },
   "linter": {
-    "enabled": true,
-    "includes": ["src/**/*.tsx", "**/*.d.tsx", "!src/components/ui/**"]
+    "enabled": true
   },
   "vcs": {
     "enabled": true,

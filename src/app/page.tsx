@@ -1,7 +1,6 @@
+import { CharactersList } from "~/components/characters-list";
+import { results } from "~/data.json";
+
 export default function Home() {
-  return (
-    <section>
-      <span>Hello World!</span>
-    </section>
-  )
+  return <CharactersList characters={results} />;
 }

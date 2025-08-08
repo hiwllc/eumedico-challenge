@@ -1,8 +1,8 @@
 "use client";
 
 import { PlusCircleIcon } from "lucide-react";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
+import { Checkbox } from "./ui/checkbox";
 import {
   Command,
   CommandEmpty,
@@ -12,7 +12,7 @@ import {
   CommandList,
   CommandSeparator,
 } from "./ui/command";
-import { Checkbox } from "./ui/checkbox";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Separator } from "./ui/separator";
 
 type Props = {
