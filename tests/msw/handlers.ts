@@ -1,5 +1,5 @@
 import { graphql, HttpResponse } from 'msw'
-import { CharactersResult } from '~/types/response'
+import { CharacterResult, CharactersResult } from '~/types/response'
 
 const api = graphql.link('https://rickandmortyapi.com/graphql')
 
@@ -13,6 +13,33 @@ export const handlers = [
             { id: 1, name: 'Rick Sanchez', status: 'Alive', image: '...', location: { name: 'Earth', url: '' } },
             { id: 2, name: 'Morty Smith', status: 'Alive', image: '...', location: { name: 'Earth', url: '' } },
           ],
+        },
+      }
+    })
+  }),
+
+  api.query<CharacterResult, { id: string }>('Character', ({ variables }) => {
+    return HttpResponse.json({
+      data: {
+        character: {
+          id: 1,
+          name: 'Rick Sanchez',
+          species: 'Human',
+          gender: 'Male',
+          status: 'Alive',
+          image: '...',
+          type: '',
+          origin: {
+            name: 'Earth (C-137)',
+            url: '',
+          },
+          location: {
+            name: 'Earth',
+            url: ''
+          },
+          episode: [''],
+          url: '',
+          created: ''
         },
       }
     })
