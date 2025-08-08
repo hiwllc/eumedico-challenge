@@ -30,7 +30,7 @@ export function Filter() {
   );
 
   return (
-    <section className="w-full py-10 flex flex-col sticky top-0 z-10 bg-white/40 backdrop-blur-xl">
+    <section className="w-full py-10 flex flex-col sticky top-0 z-10 bg-background">
       <div className="w-full container mx-auto space-y-3">
         <h4 className="text-sm font-bold text-foreground uppercase">
           Busca e Filtros
