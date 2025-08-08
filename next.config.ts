@@ -9,6 +9,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    }
+  },
+  experimental: {
+    scrollRestoration: true,
+  }
 };
 
 export default nextConfig;

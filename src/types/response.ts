@@ -23,7 +23,7 @@ export type Character = {
   created: string;
 };
 
-export type Characters = Array<Character>;
+export type Characters = Array<Pick<Character, 'id' | 'name' | 'location' | 'status'>>;
 
 export type PageInfo = {
   count: number;
@@ -33,6 +33,12 @@ export type PageInfo = {
 };
 
 export type CharactersResult = {
-  info: PageInfo;
-  results: Characters;
+  characters: {
+    info: PageInfo;
+    results: Characters;
+  }
 };
+
+export type CharacterResult = {
+  character: Character
+}
