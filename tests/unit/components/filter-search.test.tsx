@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import event from "@testing-library/user-event";
-import { afterEach } from "node:test";
-import { beforeEach, expect, test, vi } from "vitest";
+import { afterEach, beforeEach, expect, test, vi } from "vitest";
 import { FilterSearch } from "~/components/filter-search";
 
 beforeEach(() => {
