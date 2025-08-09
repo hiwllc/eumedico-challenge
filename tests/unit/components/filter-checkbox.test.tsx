@@ -3,7 +3,6 @@ import user from "@testing-library/user-event";
 import { useState } from "react";
 import { expect, test } from "vitest";
 import { FilterCheckbox } from "~/components/filter-checkbox";
-// import { FilterPopover } from "~/components/filter-popover";
 
 function FilterImplementation() {
   const [state, setState] = useState<string>();
