@@ -1,41 +1,55 @@
 "use client";
 
-import { useCallback } from "react";
 import { useQueryString } from "~/hooks/use-query-string";
+import { FilterCheckbox } from "./filter-checkbox";
 
-// const statusOptions = [
-//   { title: "Alive", value: "Alive" },
-//   { title: "Dead", value: "Dead" },
-//   { title: "Unkwnonw", value: "Status Unkwnonw" },
-// ];
-// const genderOptions = [
-//   { title: "Male", value: "Male" },
-//   { title: "Female", value: "Female" },
-//   { title: "Genderless", value: "Genderless" },
-//   { title: "Unkwnown", value: "Gender Unkwnown" },
-// ];
+const filters = {
+  status: {
+    title: "Status",
+    options: [
+      { title: "Alive", value: "Alive" },
+      { title: "Dead", value: "Dead" },
+      { title: "Unkwnonw", value: "Status Unkwnonw" },
+    ],
+  },
+  gender: {
+    title: "Gênero",
+    options: [
+      { title: "Male", value: "Male" },
+      { title: "Female", value: "Female" },
+      { title: "Genderless", value: "Genderless" },
+      { title: "Unkwnown", value: "Gender Unkwnown" },
+    ],
+  },
+};
 
-/** @todo add filters to aside */
 export function Filter() {
-  const search = useQueryString("q");
-
-  const onSearch = useCallback(
-    (value: string) => {
-      value.length > 3 ? search.update(value) : search.remove();
-    },
-    [search.remove, search.update],
-  );
+  const status = useQueryString("status");
+  const gender = useQueryString("gender");
 
   return (
-    <section className="w-full py-10 flex flex-col sticky top-0 z-10 bg-background">
-      <div className="w-full container mx-auto space-y-3">
-        <h4 className="text-sm font-bold text-foreground uppercase">
-          Busca e Filtros
-        </h4>
-        <form className="w-full gap-4 flex flex-col md:flex-row">
-          {/* <FilterSearch onSearch={onSearch} debounce={500} /> */}
-        </form>
-      </div>
-    </section>
+    <aside className="w-full flex flex-col space-y-6">
+      <h4 className="text-sm text-green-800/80 font-bold uppercase py-1">
+        Filtrar
+      </h4>
+
+      <FilterCheckbox
+        title={filters.status.title}
+        options={filters.status.options}
+        selected={status.value}
+        onCheckedValueChage={(option) =>
+          option === status.value ? status.remove() : status.update(option)
+        }
+      />
+
+      <FilterCheckbox
+        title={filters.gender.title}
+        options={filters.gender.options}
+        selected={gender.value}
+        onCheckedValueChage={(option) =>
+          option === gender.value ? gender.remove() : gender.update(option)
+        }
+      />
+    </aside>
   );
 }
