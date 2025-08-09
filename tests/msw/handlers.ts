@@ -1,18 +1,31 @@
 import { graphql, HttpResponse } from 'msw'
-import { CharacterResult, CharactersResult } from '~/types/response'
+import { Character, CharacterResult, CharactersResult } from '~/types/response'
 
 const api = graphql.link('https://rickandmortyapi.com/graphql')
 
 export const handlers = [
   api.query<CharactersResult, { page: string }>('Characters', ({ variables }) => {
+    const { page = 1 } = variables
+
+    const pages: Record<number, Pick<Character, 'id' | 'name' | 'status' | 'image' | 'location'>[]> = {
+      1: [
+        { id: 1, name: "Rick Sanchez",  status: "Alive", image: "...", location: { name: "Earth", url: "" } },
+        { id: 2, name: "Morty Smith",   status: "Alive", image: "...", location: { name: "Earth", url: "" } },
+      ],
+      2: [
+        { id: 3, name: "Summer Smith",  status: "Alive", image: "...", location: { name: "Earth", url: "" } },
+        { id: 4, name: "Beth Smith",    status: "Alive", image: "...", location: { name: "Earth", url: "" } },
+      ],
+    };
+
+    const count = 4;
+    const results = pages[Number(page)] ?? []
+
     return HttpResponse.json({
       data: {
         characters: {
-          info: { count: 2, pages: 1, next: null, prev: null },
-          results: [
-            { id: 1, name: 'Rick Sanchez', status: 'Alive', image: '...', location: { name: 'Earth', url: '' } },
-            { id: 2, name: 'Morty Smith', status: 'Alive', image: '...', location: { name: 'Earth', url: '' } },
-          ],
+          info: { count, pages: 2, next: page === 1 ? 2 : null, prev: Number(page) < 2 ? null : 1 },
+          results,
         },
       }
     })

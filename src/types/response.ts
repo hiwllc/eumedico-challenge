@@ -28,8 +28,8 @@ export type Characters = Array<Pick<Character, 'id' | 'image' | 'name' | 'locati
 export type PageInfo = {
   count: number;
   pages: number;
-  next?: string | null;
-  prev?: string | null;
+  next: number | null;
+  prev: number | null;
 };
 
 export type CharactersResult = {

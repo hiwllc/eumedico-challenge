@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Character } from "~/types/response";
 
 type Props = {
-  character: Character;
+  character: Pick<Character, "id" | "image" | "name" | "location" | "status">;
 };
 
 export function CharacterCard({ character }: Props) {
