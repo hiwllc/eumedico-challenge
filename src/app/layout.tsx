@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
+import { Search } from "~/components/search";
 
 export const metadata: Metadata = {
   title: {
@@ -34,7 +35,11 @@ export default function RootLayout({
           </section>
         </header>
 
-        <main className="mx-auto container px-6">{children}</main>
+        <main className="mx-auto container px-6">
+          <Search />
+
+          {children}
+        </main>
       </body>
     </html>
   );
