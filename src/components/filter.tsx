@@ -1,7 +1,10 @@
 "use client";
 
+import { FilterIcon } from "lucide-react";
+import { useMediaQuery } from "~/hooks/use-media-query";
 import { useQueryString } from "~/hooks/use-query-string";
 import { FilterCheckbox } from "./filter-checkbox";
+import { Button } from "./ui/button";
 import {
   Drawer,
   DrawerContent,
@@ -10,9 +13,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "./ui/drawer";
-import { Button } from "./ui/button";
-import { FilterIcon } from "lucide-react";
-import { useMediaQuery } from "~/hooks/use-media-query";
 
 const filters = {
   status: {

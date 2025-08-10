@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { CharactersList } from "~/components/characters-list";
 import { Filter } from "~/components/filter";
 import {
@@ -41,7 +42,9 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-10 min-h-dvh">
-      <Filter />
+      <Suspense>
+        <Filter />
+      </Suspense>
 
       <div>
         <CharactersList

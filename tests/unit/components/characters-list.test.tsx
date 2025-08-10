@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { expect, test } from "vitest";
 import { CharactersList } from "~/components/characters-list";
-import { results } from "~/data.json";
+import { results } from "../../fixtures/data.json";
 
 test("Characters list should contain a list of characters", () => {
   const characters = results.splice(0, 3);

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { expect, test } from "vitest";
 import { CharacterCard } from "~/components/character-card";
-import { results } from "~/data.json";
+import { results } from "../../fixtures/data.json";
 
 test("Character information should be visible in character card", () => {
   const character = results[0];

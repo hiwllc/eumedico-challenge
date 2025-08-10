@@ -1,11 +1,12 @@
 "use client";
 
 import { SearchIcon, XIcon } from "lucide-react";
+import { Suspense } from "react";
 import { useQueryString } from "~/hooks/use-query-string";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
-export function Search() {
+export function SearchComponent() {
   const name = useQueryString("name");
 
   const updateSearch = (data: FormData) => {
@@ -62,5 +63,13 @@ export function Search() {
         </form>
       </div>
     </section>
+  );
+}
+
+export function Search() {
+  return (
+    <Suspense>
+      <SearchComponent />
+    </Suspense>
   );
 }
