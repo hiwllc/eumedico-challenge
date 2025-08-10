@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "~/lib/utils";
 import { Checkbox } from "./ui/checkbox";
 
 type Props = {
@@ -27,7 +28,9 @@ export function FilterCheckbox({
           <label
             htmlFor={option.title}
             key={option.value}
-            className="flex items-center gap-2 text-sm font-medium"
+            className={cn("flex items-center gap-2 text-sm font-medium", {
+              "text-green-800": selected === option.title,
+            })}
           >
             <Checkbox
               id={option.title}

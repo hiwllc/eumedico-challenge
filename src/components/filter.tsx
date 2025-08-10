@@ -2,6 +2,17 @@
 
 import { useQueryString } from "~/hooks/use-query-string";
 import { FilterCheckbox } from "./filter-checkbox";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "./ui/drawer";
+import { Button } from "./ui/button";
+import { FilterIcon } from "lucide-react";
+import { useMediaQuery } from "~/hooks/use-media-query";
 
 const filters = {
   status: {
@@ -23,13 +34,13 @@ const filters = {
   },
 };
 
-export function Filter() {
+export function FilterComponent() {
   const status = useQueryString("status");
   const gender = useQueryString("gender");
 
   return (
     <aside className="w-full flex flex-col space-y-6">
-      <h4 className="text-sm text-green-800/80 font-bold uppercase py-1">
+      <h4 className="hidden md:block text-sm text-green-800/80 font-bold uppercase py-1">
         Filtrar
       </h4>
 
@@ -51,5 +62,39 @@ export function Filter() {
         }
       />
     </aside>
+  );
+}
+
+export function Filter() {
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  if (isDesktop) {
+    return <FilterComponent />;
+  }
+
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button
+          className="rounded-full fixed right-6 bottom-6 bg-green-800 z-50"
+          size="icon"
+        >
+          <FilterIcon />
+        </Button>
+      </DrawerTrigger>
+
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle className="font-bold text-2xl uppercase text-green-800">
+            Filtrar
+          </DrawerTitle>
+          <DrawerDescription>Filtre por Status e Gênero.</DrawerDescription>
+        </DrawerHeader>
+
+        <div className="p-6">
+          <FilterComponent />
+        </div>
+      </DrawerContent>
+    </Drawer>
   );
 }

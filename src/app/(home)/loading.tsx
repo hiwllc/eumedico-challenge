@@ -3,7 +3,7 @@ import { Skeleton } from "~/components/ui/skeleton";
 
 export default async function Loading() {
   return (
-    <div className="grid grid-cols-[200px_1fr] gap-10 min-h-dvh">
+    <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-10 min-h-dvh">
       <Filter />
 
       <div>
