@@ -1,30 +1,49 @@
 import { graphql, HttpResponse } from 'msw'
-import { Character, CharacterResult, CharactersResult } from '~/types/response'
+import { QueryParams } from '~/services/characters'
+import { CharacterResult, CharactersResult } from '~/types/response'
 
 const api = graphql.link('https://rickandmortyapi.com/graphql')
 
 export const handlers = [
-  api.query<CharactersResult, { page: string }>('Characters', ({ variables }) => {
-    const { page = 1 } = variables
+  api.query<CharactersResult, QueryParams>('Characters', ({ variables }) => {
+    const PAGE_SIZE = 2
+    const { page = 1, name, status, gender } = variables
 
-    const pages: Record<number, Pick<Character, 'id' | 'name' | 'status' | 'image' | 'location'>[]> = {
-      1: [
-        { id: 1, name: "Rick Sanchez",  status: "Alive", image: "...", location: { name: "Earth", url: "" } },
-        { id: 2, name: "Morty Smith",   status: "Alive", image: "...", location: { name: "Earth", url: "" } },
-      ],
-      2: [
-        { id: 3, name: "Summer Smith",  status: "Alive", image: "...", location: { name: "Earth", url: "" } },
-        { id: 4, name: "Beth Smith",    status: "Alive", image: "...", location: { name: "Earth", url: "" } },
-      ],
-    };
+    const characters = [
+      { id: 1, name: "Rick Sanchez", gender: 'Male',  status: "Alive", image: "...", location: { name: "Earth", url: "" } },
+      { id: 2, name: "Morty Smith", gender: 'Male',  status: "Alive", image: "...", location: { name: "Earth", url: "" } },
+      { id: 3, name: "Summer Smith", gender: 'Female', status: "Dead", image: "...", location: { name: "Earth", url: "" } },
+      { id: 4, name: "Beth Smith",  gender: 'Female',  status: "Unknown", image: "...", location: { name: "Earth", url: "" } },
+    ]
 
-    const count = 4;
-    const results = pages[Number(page)] ?? []
+    let data = characters
+
+    if (name) {
+      data = data.filter(character => character.name.toLocaleLowerCase().includes(name.toLocaleLowerCase()))
+    }
+
+    if (status) {
+      data = data.filter(character => character.status === status)
+    }
+
+    if (gender) {
+      data = data.filter(character => character.gender === gender)
+    }
+
+    const count = data.length;
+    const pages = Math.max(1, Math.ceil(count / PAGE_SIZE))
+    const start = (page - 1) * PAGE_SIZE
+    const results = data.slice(start, start + PAGE_SIZE)
 
     return HttpResponse.json({
       data: {
         characters: {
-          info: { count, pages: 2, next: page === 1 ? 2 : null, prev: Number(page) < 2 ? null : 1 },
+          info: {
+            count,
+            pages,
+            next: page < pages ? page + 1 : null,
+            prev: page > 1 ? page - 1 : null
+          },
           results,
         },
       }

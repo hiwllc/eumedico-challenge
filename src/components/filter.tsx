@@ -9,7 +9,7 @@ const filters = {
     options: [
       { title: "Alive", value: "Alive" },
       { title: "Dead", value: "Dead" },
-      { title: "Unkwnonw", value: "Status Unkwnonw" },
+      { title: "Unknown", value: "Status Unknown" },
     ],
   },
   gender: {
