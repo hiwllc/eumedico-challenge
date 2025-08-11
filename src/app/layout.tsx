@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
-import { Search } from "~/components/search";
 import { Suspense } from "react";
+import { Search } from "~/components/search";
 
 export const metadata: Metadata = {
   title: {
