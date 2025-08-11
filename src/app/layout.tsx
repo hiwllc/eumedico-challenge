@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
 import { Search } from "~/components/search";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: {
@@ -20,26 +21,27 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className="antialiased">
-        <header className="w-full">
-          <section className="container mx-auto w-full flex items-center justify-center h-60 px-6">
-            <h1>
-              <Link href="/">
-                <Image
-                  src="/assets/images/logo.svg"
-                  width={320}
-                  height={200}
-                  alt="Rick and Morty"
-                />
-              </Link>
-            </h1>
-          </section>
-        </header>
+        <Suspense fallback="carregando...">
+          <header className="w-full">
+            <section className="container mx-auto w-full flex items-center justify-center h-60 px-6">
+              <h1>
+                <Link href="/">
+                  <Image
+                    src="/assets/images/logo.svg"
+                    width={320}
+                    height={200}
+                    alt="Rick and Morty"
+                  />
+                </Link>
+              </h1>
+            </section>
+          </header>
 
-        <main className="mx-auto container px-6">
-          <Search />
-
-          {children}
-        </main>
+          <main className="mx-auto container px-6">
+            <Search />
+            {children}
+          </main>
+        </Suspense>
       </body>
     </html>
   );
