@@ -1,4 +1,5 @@
 import { ArrowLeftCircleIcon } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,6 +10,21 @@ type Props = {
     character: string;
   }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { character: id } = await params;
+  const result = await getCharacter(id);
+
+  if (!result) {
+    return {
+      title: "Personagem não encontrado",
+    };
+  }
+
+  return {
+    title: result.character.name,
+  };
+}
 
 export default async function CharacterPage({ params }: Props) {
   const { character: id } = await params;
