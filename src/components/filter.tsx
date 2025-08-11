@@ -1,7 +1,6 @@
 "use client";
 
 import { FilterIcon } from "lucide-react";
-import { useMediaQuery } from "~/hooks/use-media-query";
 import { useQueryString } from "~/hooks/use-query-string";
 import { FilterCheckbox } from "./filter-checkbox";
 import { Button } from "./ui/button";
@@ -34,16 +33,12 @@ const filters = {
   },
 };
 
-export function FilterComponent() {
+function FilterComponent() {
   const status = useQueryString("status");
   const gender = useQueryString("gender");
 
   return (
-    <aside className="w-full flex flex-col space-y-6">
-      <h4 className="hidden md:block text-sm text-green-800/80 font-bold uppercase py-1">
-        Filtrar
-      </h4>
-
+    <>
       <FilterCheckbox
         title={filters.status.title}
         options={filters.status.options}
@@ -61,40 +56,44 @@ export function FilterComponent() {
           option === gender.value ? gender.remove() : gender.update(option)
         }
       />
-    </aside>
+    </>
   );
 }
 
 export function Filter() {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
-
-  if (isDesktop) {
-    return <FilterComponent />;
-  }
-
   return (
-    <Drawer>
-      <DrawerTrigger asChild>
-        <Button
-          className="rounded-full fixed right-6 bottom-6 bg-green-800 z-50"
-          size="icon"
-        >
-          <FilterIcon />
-        </Button>
-      </DrawerTrigger>
+    <>
+      <aside className="w-full flex-col space-y-6 hidden md:flex">
+        <h4 className="hidden md:block text-sm text-green-800/80 font-bold uppercase py-1">
+          Filtrar
+        </h4>
 
-      <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle className="font-bold text-2xl uppercase text-green-800">
-            Filtrar
-          </DrawerTitle>
-          <DrawerDescription>Filtre por Status e Gênero.</DrawerDescription>
-        </DrawerHeader>
+        <FilterComponent />
+      </aside>
 
-        <div className="p-6">
-          <FilterComponent />
-        </div>
-      </DrawerContent>
-    </Drawer>
+      <Drawer>
+        <DrawerTrigger asChild>
+          <Button
+            className="rounded-full fixed right-6 bottom-6 bg-green-800 z-50 md:hidden"
+            size="icon"
+          >
+            <FilterIcon />
+          </Button>
+        </DrawerTrigger>
+
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle className="font-bold text-2xl uppercase text-green-800">
+              Filtrar
+            </DrawerTitle>
+            <DrawerDescription>Filtre por Status e Gênero.</DrawerDescription>
+          </DrawerHeader>
+
+          <div className="p-6">
+            <FilterComponent />
+          </div>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 }
