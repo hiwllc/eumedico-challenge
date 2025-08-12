@@ -9,7 +9,7 @@ test('should list characters and navigate to first character', async ({ page }) 
   await card.click()
 
   await expect(page).toHaveURL(/\/1$/)
-  await expect(page.getByText('Rick Sanchez')).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Rick Sanchez' })).toBeVisible()
 
   await page.getByRole('link', { name: 'Voltar Para Página Inicial' }).click()
   await expect(page).not.toHaveURL(/\/1$/)

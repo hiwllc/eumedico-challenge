@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 test('should filter for status', async ({ page }) => {
   await page.goto('/')
 
-  const status = page.getByText('Alive', { exact: true })
+  const status = page.getByRole('complementary').getByText('Alive')
   await status.click()
 
   await expect(page.getByRole('checkbox', { name: /alive/i })).toBeChecked()
@@ -19,7 +19,7 @@ test('should filter for status', async ({ page }) => {
 test('should filter for gender', async ({ page }) => {
   await page.goto('/')
 
-  const gender = page.getByText('Female', { exact: true })
+  const gender = page.getByRole('complementary').getByText('Female')
   await gender.click()
 
   await expect(page.getByRole('checkbox', { name: /female/i })).toBeChecked()
@@ -35,7 +35,7 @@ test('should filter for gender', async ({ page }) => {
 test('should filter for status and gender', async ({ page }) => {
   await page.goto('/')
 
-  const status = page.getByText('Dead', { exact: true })
+  const status = page.getByRole('complementary').getByText('Dead')
   await status.click()
   await expect(page.getByRole('checkbox', { name: 'Dead' })).toBeChecked()
 
